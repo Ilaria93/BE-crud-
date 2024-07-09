@@ -1,0 +1,28 @@
+image: node:14
+
+stages:
+  - build
+  - test
+  - deploy
+
+before_script:
+  - npm install
+
+build:
+  stage: build
+  script:
+    - echo "Building the application..."
+    - npm run build
+
+test:
+  stage: test
+  script:
+    - echo "Running tests..."
+    - npm test
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying the application..."
+    - docker build -t myapp .
+    - docker-compose up -d
